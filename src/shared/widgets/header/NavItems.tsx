@@ -1,0 +1,17 @@
+import { navItems } from "@/app/configs/constants";
+import Link from "next/link";
+import React from "react";
+
+const NavItems = () => {
+  return (
+    <div>
+      {navItems.map((i: NavItems, index: number) => (
+        <Link key={index} href={"/"} className="px-5 text-lg">
+          {i.title}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+export default NavItems;
