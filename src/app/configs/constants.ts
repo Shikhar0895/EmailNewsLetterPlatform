@@ -1,4 +1,4 @@
-import { ICONS } from "@/shared/utils/icons";
+import { ICONS } from "@/app/shared/utils/icons";
 import { atom } from "jotai";
 
 export const navItems: NavItems[] = [

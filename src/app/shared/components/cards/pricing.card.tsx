@@ -1,5 +1,5 @@
 import { GrowPlan, freePlan, scalePlan } from "@/app/configs/constants";
-import { ICONS } from "@/shared/utils/icons";
+import { ICONS } from "@/app/shared/utils/icons";
 import { Button } from "@nextui-org/button";
 
 const Pricingcard = ({ active }: { active: string }) => {

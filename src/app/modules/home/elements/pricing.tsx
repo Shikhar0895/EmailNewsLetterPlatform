@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
-import PricingCard from "@/shared/components/cards/pricing.card";
-import Pricingcard from "@/shared/components/cards/pricing.card";
+import PricingCard from "@/app/shared/components/cards/pricing.card";
+import Pricingcard from "@/app/shared/components/cards/pricing.card";
 const Pricing = () => {
   const [active, setActive] = useState("Monthly");
   return (
