@@ -2,6 +2,7 @@
 
 toast;
 
+import { subscribe } from "@/actions/add.subscribe";
 import { useClerk } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
@@ -14,7 +15,21 @@ const Page = () => {
   const searchParams = useSearchParams();
   const username: string = searchParams.get("username")!;
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {};
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const subscriberData = await subscribe({ email: value, username });
+      if (!subscriberData) toast.error(subscriberData);
+      else {
+        toast.success("You are successfully subscribed");
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+    setValue("");
+  };
 
   return (
     <div className="w-full flex flex-col items-center justify-center h-screen">
