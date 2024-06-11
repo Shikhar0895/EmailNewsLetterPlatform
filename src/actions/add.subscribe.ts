@@ -37,6 +37,7 @@ export const subscribe = async ({
     const subscriber = await Subscriber.create({
       email,
       newsLetterOwnerId: newsLetterOwner?.id,
+      source: "ByShikharS",
       status: "Subscribed",
     });
     console.log(subscriber);

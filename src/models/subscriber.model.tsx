@@ -5,8 +5,8 @@ const subscriberSchema = new Schema(
   {
     email: { type: String },
     newsLetterOwnerId: { type: String },
-    source: { type: String },
-    status: { type: String },
+    source: { type: String, default: "ByShikharS" },
+    status: { type: String, default: "subscribed" },
   },
   { timestamps: true }
 );
