@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { subscribersAnalytics } from "@/actions/subscribers.analytics";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -8,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import useSubscribersAnalytics from "../../hooks/useSubscribersAnalytics";
 
 interface subscribersAnalyticsData {
   month: string;
@@ -15,39 +17,13 @@ interface subscribersAnalyticsData {
 }
 
 const SubscribersChart = () => {
-  const [subscribersData, setSubscribersData] = useState<any>([]);
-  const loading = false;
-  const data = [
-    {
-      month: "Jan 2024",
-      count: 2400,
-    },
-    {
-      month: "Feb 2024",
-      count: 1398,
-    },
-    {
-      month: "March 2024",
-      count: 9800,
-    },
-    {
-      month: "April 2024",
-      count: 3908,
-    },
-    {
-      month: "May 2024",
-      count: 4800,
-    },
-    {
-      month: "Jun 2024",
-      count: 3800,
-    },
-    {
-      month: "July 2024",
-      count: 4300,
-    },
-  ];
+  const { subscribersData, loading } = useSubscribersAnalytics();
 
+  const data: subscribersAnalyticsData[] = [];
+  subscribersData &&
+    subscribersData?.last7Months?.forEach((item: subscribersAnalyticsData) => {
+      data.push({ month: item?.month, count: item?.count });
+    });
   return (
     <div className="my-5 p-5 border rounded bg-white w-full md:h-[55vh] xl:h-[60vh]">
       <div className="w-full flex">
