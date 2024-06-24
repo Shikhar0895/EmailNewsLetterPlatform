@@ -1,12 +1,31 @@
+import { manageSubscription } from "@/actions/manage.subscription";
+import useGetMembership from "@/app/shared/hooks/useGetMembership";
+import useSubscribersAnalytics from "@/app/shared/hooks/useSubscribersAnalytics";
+import useSubscribersData from "@/app/shared/hooks/useSubscribersData";
 import { ICONS } from "@/app/shared/utils/icons";
 import { Slider } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const UserPlan = () => {
+  const { data, loading } = useSubscribersData();
+  const { data: membershipData, loading: membershipLoading } =
+    useGetMembership();
+  const history = useRouter();
+  const handleManage = async () => {
+    await manageSubscription({
+      customerId: membershipData[0]?.stripeCustomerId,
+    }).then((res: any) => {
+      history.push(res);
+    });
+  };
   return (
-    <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">
+    <div
+      className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer"
+      onClick={handleManage}
+    >
       <div className="w-full flex items-center">
-        <h5 className="text-lg font-medium">LAUNCH Plan</h5>
+        <h5 className="text-lg font-medium">{membershipData[0]?.plan}</h5>
         <div className="w-[95px] shadow ml-2 cursor-pointer h-[32px] flex justify-center items-center space-x-1 rounded-lg bg-[#E77CAE]">
           <span className="text-white text-xl">{ICONS.electric}</span>
           <span className="text-white text-sm">Upgrade</span>
@@ -16,17 +35,11 @@ const UserPlan = () => {
       <Slider
         aria-label="Player progress"
         hideThumb={true}
-        defaultValue={1}
+        defaultValue={data?.length || 0}
         className="max-w-md"
       />
       <h6 className="text-[#831743]">
-        {/* {loading ? "..." : data?.length} of{" "}
-    {membershipData?.plan === "LAUNCH"
-      ? "2500"
-      : membershipData?.plan === "SCALE"
-      ? "10,000"
-      : "1,00,000"}{" "} */}
-        0 of 2500 added
+        {loading ? "..." : data?.length} of 2500 added
       </h6>
     </div>
   );

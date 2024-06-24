@@ -8,9 +8,6 @@ const useSubscribersData = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useClerk();
 
-  // const GetSubscribers = async() => {
-  //     await getSubscribers({newsLetterOwnerId: user?.id!}).then((res:any) =>{ setData(res)})
-  // }
   const GetSubscribers = async () => {
     try {
       const response = await getSubscribers({ newsLetterOwnerId: user?.id! });

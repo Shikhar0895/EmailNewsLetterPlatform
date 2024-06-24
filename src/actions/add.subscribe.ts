@@ -3,7 +3,7 @@ import { connectDb } from "@/app/shared/libs/db";
 import { validateEmail } from "@/app/shared/utils/Zerobounce.Api";
 import Subscriber from "@/models/subscriber.model";
 import { clerkClient } from "@clerk/nextjs/server";
-import { error } from "console";
+import { Console, error } from "console";
 export const subscribe = async ({
   email,
   username,
@@ -12,6 +12,7 @@ export const subscribe = async ({
   username: string;
 }) => {
   try {
+    console.log("add Subscribe running");
     await connectDb();
     //we need to check if particular user has already subscribed to the newsletter , if not subscribed only then it can subscribe to the newsletter
     const allUsers = await clerkClient.users.getUserList();
@@ -25,6 +26,7 @@ export const subscribe = async ({
       email,
       newsLetterOwnerId: newsLetterOwner?.id,
     });
+    console.log("isSubscriberExist", isSubscriberExist);
     if (isSubscriberExist) {
       return { error: "Email already exists!" };
     }

@@ -126,19 +126,40 @@ export const sideBarBottomItems: DashboardSideBarTypes[] = [
   },
 ];
 
-export const subscribersData: subscribersDataTypes[] = [
+export const stripePaymentLinkUrlMonthly = [
   {
-    _id: "64f717a45331088de2ce886c",
-    email: "programmershahriarsajeeb@gmail.com",
-    createdAt: "5Feb 2024",
-    source: "Becodemy website",
-    status: "subscribed",
+    plan: "growMonthly",
+    link: "https://buy.stripe.com/test_7sIaIf0ZJ5DSaiY7ss",
   },
   {
-    _id: "64f717a45331088de2ce886c",
-    email: "support@becodemy.com",
-    createdAt: "8Feb 2024",
-    source: "External website",
-    status: "subscribed",
+    plan: "scaleMonthly",
+    link: "https://buy.stripe.com/test_14k5nVaAjaYcdva6oq",
   },
 ];
+
+export const stripePaymentLinkUrlYearly = [
+  {
+    plan: "growYearly",
+    link: "https://buy.stripe.com/test_6oE3fN23Nd6k4YE8wx",
+  },
+  {
+    plan: "scaleYearly",
+    link: "https://buy.stripe.com/test_3cs2bJ5fZ3vKdva147",
+  },
+];
+// export const subscribersData: subscribersDataTypes[] = [
+//   {
+//     _id: "64f717a45331088de2ce886c",
+//     email: "programmershahriarsajeeb@gmail.com",
+//     createdAt: "5Feb 2024",
+//     source: "Becodemy website",
+//     status: "subscribed",
+//   },
+//   {
+//     _id: "64f717a45331088de2ce886c",
+//     email: "support@becodemy.com",
+//     createdAt: "8Feb 2024",
+//     source: "External website",
+//     status: "subscribed",
+//   },
+// ];

@@ -1,8 +1,28 @@
+import { stripeSubscribe } from "@/actions/stripe.subscribe";
 import { GrowPlan, freePlan, scalePlan } from "@/app/configs/constants";
 import { ICONS } from "@/app/shared/utils/icons";
+import { useUser } from "@clerk/nextjs";
 import { Button } from "@nextui-org/button";
+import { useRouter } from "next/navigation";
 
 const Pricingcard = ({ active }: { active: string }) => {
+  const { user } = useUser();
+  console.log(user);
+  const history = useRouter();
+  const handleSubscription = async ({
+    price,
+    plan,
+  }: {
+    price: string;
+    plan: string;
+  }) => {
+    await stripeSubscribe({
+      price: price,
+      userId: user?.id!,
+    }).then((res: any) => {
+      history.push(res);
+    });
+  };
   return (
     <div className="w-full md:flex items-start justify-around py-8">
       {/* freeplan */}
@@ -17,7 +37,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           <path
             fill="#fff"
             stroke="#3843D0"
-            stroke-width="3"
+            strokeWidth="3"
             d="M33.398 13.25a6.512 6.512 0 0 1 0 6.5l-4.887 8.487a6.512 6.512 0 0 1-5.643 3.263h-9.736a6.512 6.512 0 0 1-5.643-3.263L2.602 19.75a6.512 6.512 0 0 1 0-6.498l4.887-8.488A6.512 6.512 0 0 1 13.132 1.5h9.736a6.512 6.512 0 0 1 5.643 3.263l4.887 8.488Z"
           ></path>
         </svg>
@@ -41,7 +61,16 @@ const Pricingcard = ({ active }: { active: string }) => {
           </div>
         ))}
         <br />
-        <Button color="primary" className="w-full text-xl !py-6">
+        <Button
+          color="primary"
+          className="w-full text-xl !py-6"
+          onClick={() =>
+            handleSubscription({
+              price: active === "Monthly" ? "0" : "0",
+              plan: "LAUNCH",
+            })
+          }
+        >
           Get Started
         </Button>
         <p className="pt-1 opacity-[0.7] text-center">
@@ -60,7 +89,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           <path
             fill="#fff"
             stroke="#3843D0"
-            stroke-width="3"
+            strokeWidth="3"
             d="M33.398 13.25a6.512 6.512 0 0 1 0 6.5l-4.887 8.487a6.512 6.512 0 0 1-5.643 3.263h-9.736a6.512 6.512 0 0 1-5.643-3.263L2.602 19.75a6.512 6.512 0 0 1 0-6.498l4.887-8.488A6.512 6.512 0 0 1 13.132 1.5h9.736a6.512 6.512 0 0 1 5.643 3.263l4.887 8.488Z"
           ></path>
         </svg>
@@ -70,7 +99,7 @@ const Pricingcard = ({ active }: { active: string }) => {
         <br />
         <div className="border-b pb-8 border-black">
           <h5 className="font-clashDisplay uppercase text-cyber-ink text-3xl">
-            ${active === "Monthly" ? "49" : "42"} /month
+            ₹{active === "Monthly" ? "1200" : "800"} /month
           </h5>
           <p className="text-lg">Billed {active}</p>
         </div>
@@ -87,19 +116,20 @@ const Pricingcard = ({ active }: { active: string }) => {
         <Button
           color="primary"
           className="w-full text-xl !py-6"
-          // onClick={() =>
-          //   handleSubscription({
-          //     price:
-          //       active === "Monthly"
-          //         ? "price_1OnaWFSA1WAzNgKlsGN6K4ZW"
-          //         : "price_1Onbt8SA1WAzNgKlyrXYlJBG",
-          //   })
-          // }
+          onClick={() =>
+            handleSubscription({
+              price:
+                active === "Monthly"
+                  ? "price_1PSeynRoGUmdP5c1psVk1Er9"
+                  : "price_1PUrByRoGUmdP5c1fmD6LQJ5",
+              plan: "GROW",
+            })
+          }
         >
           Get Started
         </Button>
         <p className="pt-1 opacity-[.7] text-center">
-          30-day free trial of Scale features, then $
+          30-day free trial of Scale features, then ₹
           {active === "Monthly" ? "42" : "49"}/mo
         </p>
       </div>
@@ -115,7 +145,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           <path
             fill="#fff"
             stroke="#3843D0"
-            stroke-width="3"
+            strokeWidth="3"
             d="M33.398 13.25a6.512 6.512 0 0 1 0 6.5l-4.887 8.487a6.512 6.512 0 0 1-5.643 3.263h-9.736a6.512 6.512 0 0 1-5.643-3.263L2.602 19.75a6.512 6.512 0 0 1 0-6.498l4.887-8.488A6.512 6.512 0 0 1 13.132 1.5h9.736a6.512 6.512 0 0 1 5.643 3.263l4.887 8.488Z"
           ></path>
         </svg>
@@ -125,7 +155,7 @@ const Pricingcard = ({ active }: { active: string }) => {
         <br />
         <div className="border-b pb-8 border-black">
           <h5 className="font-clashDisplay uppercase text-cyber-ink text-3xl">
-            ${active === "Monthly" ? "99" : "84"} /month
+            ₹{active === "Monthly" ? "1500" : "1000"} /month
           </h5>
           <p className="text-lg">Billed {active}</p>
         </div>
@@ -142,20 +172,21 @@ const Pricingcard = ({ active }: { active: string }) => {
         <Button
           color="primary"
           className="w-full text-xl !py-6"
-          // onClick={() =>
-          //   handleSubscription({
-          //     price:
-          //       active === "Monthly"
-          //         ? "price_1OnaWFSA1WAzNgKlsGN6K4ZW"
-          //         : "price_1Onbt8SA1WAzNgKlyrXYlJBG",
-          //   })
-          // }
+          onClick={() =>
+            handleSubscription({
+              price:
+                active === "Monthly"
+                  ? "price_1PUoq6RoGUmdP5c1pAeayoQp"
+                  : "price_1PUrAiRoGUmdP5c1WFYB8tkU",
+              plan: "SCALE",
+            })
+          }
         >
           Get Started
         </Button>
         <p className="pt-1 opacity-[.7] text-center">
-          30-day free trial of Scale features, then $
-          {active === "Monthly" ? "99" : "84"}/mo
+          30-day free trial of Scale features, then ₹
+          {active === "Monthly" ? "800" : "3000"}/mo
         </p>
       </div>
     </div>

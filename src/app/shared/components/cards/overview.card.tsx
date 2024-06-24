@@ -8,7 +8,6 @@ const OverviewCard = () => {
   const lastMonthSubscribers =
     !loading &&
     subscribersData?.last7Months[subscribersData?.last7Months?.length - 1];
-  console.log(lastMonthSubscribers);
 
   const previousLastMonthSubscribers =
     !loading &&
@@ -16,7 +15,7 @@ const OverviewCard = () => {
 
   let comparePercentage = 0;
 
-  if (previousLastMonthSubscribers.count > 0) {
+  if (previousLastMonthSubscribers?.count > 0) {
     comparePercentage =
       ((lastMonthSubscribers - previousLastMonthSubscribers) /
         previousLastMonthSubscribers) *
