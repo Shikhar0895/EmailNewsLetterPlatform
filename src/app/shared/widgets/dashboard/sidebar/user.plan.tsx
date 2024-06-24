@@ -19,7 +19,7 @@ const UserPlan = () => {
   const history = useRouter();
   const handleManage = async () => {
     await manageSubscription({
-      customerId: membershipData[0]?.stripeCustomerId,
+      customerId: membershipData[0].stripeCustomerId,
     }).then((res: any) => {
       history.push(res);
     });
