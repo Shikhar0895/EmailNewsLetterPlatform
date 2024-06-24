@@ -29,7 +29,7 @@ const Subscribersdata = () => {
   const rows: subscribersDataTypes[] = [];
   data.forEach((i: subscribersDataTypes) => {
     rows.push({
-      id: i?._id,
+      id: i?._id!,
       email: i.email,
       createdAt: format(i.createdAt),
       source: i.source,
