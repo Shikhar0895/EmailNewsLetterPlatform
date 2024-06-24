@@ -10,7 +10,7 @@ export const getMembership = async () => {
     const user = await currentUser();
     const membershipData = await Membership.find({ user: user?.id });
     console.log(membershipData);
-    return membershipData.json();
+    return membershipData;
   } catch (error) {
     console.log(error);
   }

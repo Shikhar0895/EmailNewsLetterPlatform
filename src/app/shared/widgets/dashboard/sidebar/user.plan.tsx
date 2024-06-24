@@ -11,6 +11,11 @@ const UserPlan = () => {
   const { data, loading } = useSubscribersData();
   const { data: membershipData, loading: membershipLoading } =
     useGetMembership();
+  console.log(
+    "🚀 ~ UserPlan ~ data: membershipData, loading: membershipLoading:",
+    membershipData,
+    membershipLoading
+  );
   const history = useRouter();
   const handleManage = async () => {
     await manageSubscription({
@@ -20,13 +25,15 @@ const UserPlan = () => {
     });
   };
   return (
-    <div
-      className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer"
-      onClick={handleManage}
-    >
+    <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">
       <div className="w-full flex items-center">
-        <h5 className="text-lg font-medium">{membershipData[0]?.plan}</h5>
-        <div className="w-[95px] shadow ml-2 cursor-pointer h-[32px] flex justify-center items-center space-x-1 rounded-lg bg-[#E77CAE]">
+        <h5 className="text-lg font-medium">
+          {membershipLoading ? "Loading..." : membershipData[0]?.plan}
+        </h5>
+        <div
+          className="w-[95px] shadow ml-2 cursor-pointer h-[32px] flex justify-center items-center space-x-1 rounded-lg bg-[#E77CAE]"
+          onClick={handleManage}
+        >
           <span className="text-white text-xl">{ICONS.electric}</span>
           <span className="text-white text-sm">Upgrade</span>
         </div>

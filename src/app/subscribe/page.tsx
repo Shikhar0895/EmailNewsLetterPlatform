@@ -3,7 +3,6 @@
 toast;
 
 import { subscribe } from "@/actions/add.subscribe";
-import { useClerk } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
