@@ -1,9 +1,13 @@
 "use client";
-
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ICONS } from "../../shared/utils/icons";
-import Emaileditor from "../../shared/components/editor/email.editor";
+
+const Emaileditor = dynamic(
+  () => import("../../shared/components/editor/email.editor"),
+  { ssr: false }
+);
 
 const Page = () => {
   const searchParams = useSearchParams();
