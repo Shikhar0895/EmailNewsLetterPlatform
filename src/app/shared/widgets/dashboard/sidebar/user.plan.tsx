@@ -11,12 +11,8 @@ const UserPlan = () => {
   const { data, loading } = useSubscribersData();
   const { data: membershipData, loading: membershipLoading } =
     useGetMembership();
-  console.log(
-    "🚀 ~ UserPlan ~ data: membershipData, loading: membershipLoading:",
-    membershipData,
-    membershipLoading
-  );
   const history = useRouter();
+
   const handleManage = async () => {
     await manageSubscription({
       customerId: membershipData[0].stripeCustomerId,
@@ -42,7 +38,7 @@ const UserPlan = () => {
       <Slider
         aria-label="Player progress"
         hideThumb={true}
-        defaultValue={data?.length || 0}
+        defaultValue={data?.length}
         className="max-w-md"
       />
       <h6 className="text-[#831743]">

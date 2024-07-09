@@ -6,24 +6,25 @@ import DashboardSidebar from "@/app/shared/widgets/dashboard/sidebar/dashboard.s
 import Dashboard from "@/app/modules/dashboard";
 import { Toaster } from "react-hot-toast";
 import { addStripe } from "@/actions/add.stripe";
+import { useEffect } from "react";
 interface ProviderProps {
   children: React.ReactNode;
 }
 
 export default function Providers({ children }: ProviderProps) {
   const pathname = usePathname();
+
   const { isLoaded, user } = useUser();
 
   const isStripeCustomerIdHas = async () => {
     await addStripe();
   };
 
-  if (!isLoaded) return null;
-  else {
+  useEffect(() => {
     if (isLoaded && user) {
       isStripeCustomerIdHas();
     }
-  }
+  }, [isLoaded, user]);
 
   return (
     <NextUIProvider>
@@ -32,9 +33,10 @@ export default function Providers({ children }: ProviderProps) {
       !pathname.includes("/sign-up") &&
       pathname !== "/sign-in" &&
       pathname !== "/success" &&
+      pathname !== "/error" &&
       pathname !== "/subscribe" ? (
         <div className="w-full flex">
-          <div className="w-[290px] h-screen overflow-y-scroll">
+          <div className="w-[290px] h-screen overflow-y-scroll overflow-x-clip">
             <DashboardSidebar />
           </div>
           {children}

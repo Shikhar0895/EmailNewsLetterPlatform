@@ -9,8 +9,8 @@ export const getMembership = async () => {
     await connectDb();
     const user = await currentUser();
     const membershipData = await Membership.find({ user: user?.id });
-    console.log(membershipData);
-    return membershipData;
+
+    return JSON.parse(JSON.stringify(membershipData));
   } catch (error) {
     console.log(error);
   }

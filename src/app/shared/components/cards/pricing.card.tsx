@@ -7,17 +7,16 @@ import { useRouter } from "next/navigation";
 
 const Pricingcard = ({ active }: { active: string }) => {
   const { user } = useUser();
-  console.log(user);
   const history = useRouter();
   const handleSubscription = async ({
-    price,
+    priceId,
     plan,
   }: {
-    price: string;
+    priceId: string;
     plan: string;
   }) => {
     await stripeSubscribe({
-      price: price,
+      priceId: priceId,
       userId: user?.id!,
     }).then((res: any) => {
       history.push(res);
@@ -66,7 +65,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           className="w-full text-xl !py-6"
           onClick={() =>
             handleSubscription({
-              price: active === "Monthly" ? "0" : "0",
+              priceId: active === "Monthly" ? "0" : "0",
               plan: "LAUNCH",
             })
           }
@@ -118,7 +117,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           className="w-full text-xl !py-6"
           onClick={() =>
             handleSubscription({
-              price:
+              priceId:
                 active === "Monthly"
                   ? "price_1PSeynRoGUmdP5c1psVk1Er9"
                   : "price_1PUrByRoGUmdP5c1fmD6LQJ5",
@@ -174,7 +173,7 @@ const Pricingcard = ({ active }: { active: string }) => {
           className="w-full text-xl !py-6"
           onClick={() =>
             handleSubscription({
-              price:
+              priceId:
                 active === "Monthly"
                   ? "price_1PUoq6RoGUmdP5c1pAeayoQp"
                   : "price_1PUrAiRoGUmdP5c1WFYB8tkU",

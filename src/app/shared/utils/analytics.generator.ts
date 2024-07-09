@@ -1,3 +1,5 @@
+import Subscriber from "@/models/subscriber.model";
+import { currentUser } from "@clerk/nextjs/server";
 import { Document, Model } from "mongoose";
 
 interface MonthData {
@@ -10,6 +12,7 @@ export async function generateAnalyticsData<T extends Document>(
 ): Promise<{ last7Months: MonthData[] }> {
   const last7Months: MonthData[] = [];
 
+  const user = await currentUser();
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
 
@@ -30,7 +33,10 @@ export async function generateAnalyticsData<T extends Document>(
       month: "short",
       year: "numeric",
     });
-    const count = await model.countDocuments({
+
+    const count = await Subscriber.find({
+      newsLetterOwnerId: user?.id,
+    }).countDocuments({
       createdAt: {
         $gte: startDate,
         $lt: endDate,

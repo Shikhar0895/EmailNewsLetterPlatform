@@ -20,6 +20,7 @@ const useSubscribersData = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     GetSubscribers();
   }, [user]);

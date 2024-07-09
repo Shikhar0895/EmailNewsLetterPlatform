@@ -18,23 +18,24 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export const stripeSubscribe = async ({
-  price,
+  priceId,
   userId,
 }: {
-  price: string;
+  priceId: string;
   userId: string;
 }) => {
   try {
     await connectDb();
-    console.log(userId);
+    console.log(priceId);
     const user = await Membership.findOne({ user: userId });
-    console.log("user from membership collection", user);
+    console.log(user);
+
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: user.stripeCustomerId,
       line_items: [
         {
-          price: price,
+          price: priceId,
           quantity: 1,
         },
       ],
@@ -54,6 +55,6 @@ export const stripeSubscribe = async ({
     }
     return checkoutSession.url;
   } catch (error) {
-    console.log(error);
+    console.log("error from stripe subscribe", error);
   }
 };

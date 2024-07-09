@@ -13,7 +13,7 @@ export const GetEmailDetails = async ({
   try {
     await connectDb();
     const email = await Email.findOne({ title, newsLetterOwnerId }).lean();
-    console.log(typeof email);
+
     return email;
   } catch (error) {
     console.log(error);

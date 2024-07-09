@@ -1,4 +1,5 @@
 "use server";
+// import { useUser } from "@clerk/nextjs";
 import * as AWS from "aws-sdk";
 import * as nodemailer from "nodemailer";
 
@@ -6,6 +7,7 @@ interface Props {
   userEmail: string[];
   subject: string;
   content: string;
+  adminMail: string;
 }
 
 AWS.config.update({
@@ -22,15 +24,22 @@ AWS.config.getCredentials(function (error) {
 
 const ses = new AWS.SES({ apiVersion: "2010-12-01" });
 
-const adminMail = "shikhar0895@gmail.com";
-
+// const { user } = useUser();
+// const adminMail = user?.emailAddresses[0].emailAddress; //this needs to be dynamic "shikhar0895@gmail.com"
+// console.log(user?.emailAddresses[0].emailAddress);
 // Create a transporter of nodemailer
 const transporter = nodemailer.createTransport({
   SES: ses,
 });
 
-export const sendEmail = async ({ userEmail, subject, content }: Props) => {
+export const sendEmail = async ({
+  adminMail,
+  userEmail,
+  subject,
+  content,
+}: Props) => {
   try {
+    // console.log("adminMail ------->>>", adminMail);
     const response = await transporter.sendMail({
       from: adminMail,
       to: userEmail,

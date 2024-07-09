@@ -29,10 +29,10 @@ const DashboardItems = ({ bottomContent }: { bottomContent?: boolean }) => {
             <Link
               key={index}
               href={item.url}
-              className="p-2 py-5 flex items-center "
+              className="p-2 py-5 flex items-center hover:scale-110 focus:scale-110 active:scale-105 transition "
             >
               <span
-                className={`text-3xl mr-2 ${
+                className={`text-3xl mr-2  ${
                   item.url === activeRoute && `text-[#463bbd]`
                 }`}
               >
@@ -54,7 +54,7 @@ const DashboardItems = ({ bottomContent }: { bottomContent?: boolean }) => {
             (item: DashboardSideBarTypes, index: number) => (
               <Link
                 key={index}
-                className="p-2 py-5 flex items-center"
+                className="p-2 py-5 flex items-center hover:scale-110 focus:scale-110 active:scale-105 transition"
                 href={
                   item.url === "/"
                     ? `/subscribe?username=${user?.username}`
@@ -80,7 +80,7 @@ const DashboardItems = ({ bottomContent }: { bottomContent?: boolean }) => {
           )}
           {/* sign out */}
           <div
-            className="p-2 py-5 flex items-center cursor-pointer border-b"
+            className="p-2 py-5 flex items-center cursor-pointer border-b hover:scale-110 focus:scale-110 active:scale-105 transition"
             onClick={LogoutHandler}
           >
             <span className="text-3xl mr-2">{ICONS.logOut}</span>

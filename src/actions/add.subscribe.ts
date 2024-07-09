@@ -25,7 +25,7 @@ export const subscribe = async ({
       email,
       newsLetterOwnerId: newsLetterOwner?.id,
     });
-    console.log("isSubscriberExist", isSubscriberExist);
+
     if (isSubscriberExist) {
       return { error: "Email already exists!" };
     }
@@ -41,8 +41,8 @@ export const subscribe = async ({
       source: "ByShikharS",
       status: "Subscribed",
     });
-    console.log(subscriber);
-    return JSON.stringify(subscriber);
+
+    return JSON.parse(JSON.stringify(subscriber));
   } catch (error) {
     console.error(error);
     return { error: "An error occured while subscribing" };

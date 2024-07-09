@@ -9,14 +9,18 @@ import { Button } from "@nextui-org/react";
 import { saveEmail } from "@/actions/save.email";
 import { GetEmailDetails } from "@/actions/get.email-details";
 import { sendEmail } from "../../utils/email.sender";
+import useSubscribersData from "../../hooks/useSubscribersData";
 
 const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   const [loading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any | null>(DefaultJsonData);
   const { user } = useClerk();
+
   const emailEditorRef = useRef<EditorRef>(null);
   const history = useRouter();
-
+  const { data } = useSubscribersData();
+  const userEmails = data.length > 0 ? data.map((sub: any) => sub.email) : null;
+  // console.log(userEmails);
   const exportHtml = () => {
     const unlayer = emailEditorRef.current?.editor;
 
@@ -24,7 +28,8 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
       const { design, html } = data;
       setJsonData(design);
       await sendEmail({
-        userEmail: ["shikhar0895@gmail.com"],
+        adminMail: user?.emailAddresses[0].emailAddress!,
+        userEmail: userEmails,
         subject: subjectTitle,
         content: html,
       }).then((res) => {

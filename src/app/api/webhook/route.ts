@@ -47,18 +47,20 @@ const webhookHandler = async (req: NextRequest) => {
 
     switch (event.type) {
       case "customer.subscription.created":
-        console.log(subscription);
         const membership = await Membership.findOne({
           stripeCustomerId: subscription.customer,
         });
 
         if (membership) {
+          console.log("membership found");
           await Membership.updateOne(
             {
               stripeCustomerId: subscription.customer,
             },
             { $set: { plan: planName } }
           );
+        } else {
+          console.log("No membership exists");
         }
         break;
       case "customer.subscription.deleted":
@@ -72,7 +74,8 @@ const webhookHandler = async (req: NextRequest) => {
 
     // Return a response to acknowledge receipt of the event.
     return NextResponse.json({ received: true });
-  } catch {
+  } catch (err) {
+    console.log("unexpected error:", err);
     return NextResponse.json(
       {
         error: {

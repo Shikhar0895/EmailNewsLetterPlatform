@@ -6,6 +6,11 @@ const membershipSchema = new Schema(
   {
     user: {
       type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      require: true,
     },
     stripeCustomerId: {
       type: String,

@@ -7,7 +7,7 @@ import { format } from "timeago.js";
 
 const Subscribersdata = () => {
   const { data, loading } = useSubscribersData();
-  console.log(data);
+  // console.log(data);
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
     { field: "email", headerName: "Email", flex: 0.8 },

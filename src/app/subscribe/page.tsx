@@ -3,14 +3,14 @@
 toast;
 
 import { subscribe } from "@/actions/add.subscribe";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 const Page = () => {
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const history = useRouter();
   const searchParams = useSearchParams();
   const username: string = searchParams.get("username")!;
 
@@ -22,6 +22,7 @@ const Page = () => {
       if (!subscriberData) toast.error(subscriberData);
       else {
         toast.success("You are successfully subscribed");
+        history.push("/dashboard");
       }
     } catch (error) {
       console.error(error);

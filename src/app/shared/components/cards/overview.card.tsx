@@ -4,6 +4,10 @@ import useSubscribersAnalytics from "../../hooks/useSubscribersAnalytics";
 
 const OverviewCard = () => {
   const { subscribersData, loading } = useSubscribersAnalytics();
+  /*useSubscriberAnalytics ---> 
+  subscriberAnalytics ---> input (subscriberModel)
+  */
+  // console.log(subscribersData);
 
   const lastMonthSubscribers =
     !loading &&
