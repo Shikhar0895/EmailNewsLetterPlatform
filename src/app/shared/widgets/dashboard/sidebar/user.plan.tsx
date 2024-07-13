@@ -11,6 +11,7 @@ const UserPlan = () => {
   const { data, loading } = useSubscribersData();
   const { data: membershipData, loading: membershipLoading } =
     useGetMembership();
+
   const history = useRouter();
 
   const handleManage = async () => {
@@ -20,6 +21,14 @@ const UserPlan = () => {
       history.push(res);
     });
   };
+  if (membershipLoading) {
+    return (
+      <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">
+        <h5 className="text-lg font-medium">Loading...</h5>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">
       <div className="w-full flex items-center">
@@ -42,7 +51,13 @@ const UserPlan = () => {
         className="max-w-md"
       />
       <h6 className="text-[#831743]">
-        {loading ? "..." : data?.length} of 2500 added
+        {loading ? "..." : data?.length} of{" "}
+        {membershipData[0]?.plan.includes("GROW")
+          ? "2500"
+          : membershipData[0]?.plan.includes("SCALE")
+          ? "10,000"
+          : "1,00,000"}{" "}
+        added
       </h6>
     </div>
   );
