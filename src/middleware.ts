@@ -1,7 +1,7 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { auth, clerkMiddleware } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 
-function corsmiddleware(req: NextRequest, event: NextFetchEvent) {
+function corsmiddleware(req: NextRequest) {
   // Create a response object for OPTIONS requests or a default response for others
   // clerkMiddleware();
   let response =
@@ -9,7 +9,7 @@ function corsmiddleware(req: NextRequest, event: NextFetchEvent) {
       ? new NextResponse(null, {
           status: 204,
           headers: {
-            "Access-Control-Allow-Origin": "*", // Adjust as necessary
+            "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_WEBSITE_URL}`, // Adjust as necessary
             "Access-Control-Allow-Methods":
               "GET, POST, PUT, DELETE, PATCH, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
@@ -19,7 +19,10 @@ function corsmiddleware(req: NextRequest, event: NextFetchEvent) {
 
   // Ensure CORS headers are applied to all responses, not just OPTIONS
   if (req.method !== "OPTIONS") {
-    response.headers.set("Access-Control-Allow-Origin", "*");
+    response.headers.set(
+      "Access-Control-Allow-Origin",
+      `${process.env.NEXT_PUBLIC_WEBSITE_URL}`
+    );
     response.headers.set(
       "Access-Control-Allow-Methods",
       "GET, POST, PUT, DELETE, PATCH, OPTIONS"
@@ -33,7 +36,9 @@ function corsmiddleware(req: NextRequest, event: NextFetchEvent) {
   return response;
 }
 
-export default clerkMiddleware();
+export default clerkMiddleware((auth, req) => {
+  return corsmiddleware(req);
+});
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
