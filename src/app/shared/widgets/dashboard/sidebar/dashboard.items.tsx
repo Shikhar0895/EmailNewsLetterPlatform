@@ -3,7 +3,7 @@ import useRouteChange from "@/app/shared/hooks/useRouteChange";
 import { ICONS } from "@/app/shared/utils/icons";
 import { useClerk } from "@clerk/nextjs";
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import Sidebarfooter from "./sidebar.footer";
 import SidebarfooterLogo from "./sidebar.footer";
@@ -12,9 +12,12 @@ const DashboardItems = ({ bottomContent }: { bottomContent?: boolean }) => {
   const { activeRoute, setActiveRoute } = useRouteChange();
   const { signOut, user } = useClerk();
   const pathname = usePathname();
+  const history = useRouter();
   const LogoutHandler = () => {
     signOut();
-    redirect("/sign-in");
+    console.log(user);
+    history.push("/");
+    console.log(user);
   };
 
   useEffect(() => {

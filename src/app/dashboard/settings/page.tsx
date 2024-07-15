@@ -13,12 +13,13 @@ import { Snippet } from "@nextui-org/react";
 import { ICONS } from "@/app/shared/utils/icons";
 import toast from "react-hot-toast";
 
-const Page = () => {
+const page = () => {
   const { data } = useGetMembership();
   const { activeItem } = useSettingsFilter();
   const [api_Key, setApi_key] = useState("");
   const [copied, setCopied] = useState(false);
 
+  console.log(activeItem);
   useEffect(() => {
     const apiKey = Cookies.get("api_key");
     if (!apiKey) {
@@ -105,4 +106,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;
