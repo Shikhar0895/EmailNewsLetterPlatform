@@ -1,4 +1,8 @@
-import { auth, clerkMiddleware } from "@clerk/nextjs/server";
+import {
+  auth,
+  clerkMiddleware,
+  createRouteMatcher,
+} from "@clerk/nextjs/server";
 import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 
 function corsmiddleware(req: NextRequest) {
@@ -36,7 +40,13 @@ function corsmiddleware(req: NextRequest) {
   return response;
 }
 
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/subscribe(.*)",
+]);
+
 export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect();
   return corsmiddleware(req);
 });
 

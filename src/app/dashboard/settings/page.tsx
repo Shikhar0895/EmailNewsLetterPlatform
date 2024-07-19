@@ -29,16 +29,18 @@ const Page = () => {
   }, []);
 
   const generateApiKeyHanlder = async () => {
+    console.log("generateApi key handler ran");
     await generateApiKey().then((res) => {
-      Cookies.set("api_key", res);
-      setApi_key(res);
+      console.log(res);
+      Cookies.set("api_key", res!);
+      setApi_key(res!);
     });
   };
 
   const handleRegenerateApiKey = async () => {
     await regenerateApiKey().then((res) => {
-      Cookies.set("api_key", res);
-      setApi_key(res);
+      Cookies.set("api_key", res!);
+      setApi_key(res!);
       toast.success("API key updated");
     });
   };
@@ -56,7 +58,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full p-5">
+    <div className="w-full h-screen p-5">
       <SettingsTabs />
       {activeItem === "Customize Profile" && (
         <div className="w-full flex justify-center">
@@ -65,8 +67,9 @@ const Page = () => {
       )}
       {activeItem === "API Access" && (
         <div>
-          {data[0]?.plan.includes("GROW") ? (
-            <div className="w-full h-screen flex justify-center items-center">
+          {data[0]?.plan.includes("GROW") /*||
+          data[0]?.plan.includes("LAUNCH")*/ ? (
+            <div className="w-full flex justify-center items-center">
               <h3>Please update you subscription plan to get access of API</h3>
             </div>
           ) : (
