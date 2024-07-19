@@ -10,6 +10,7 @@ export const getEmails = async ({
   try {
     await connectDb();
     const emails = await Email.find({ newsLetterOwnerId });
+    // console.log(typeof emails, "\n", emails);
     return emails;
   } catch (error) {
     console.log(error);
