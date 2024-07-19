@@ -77,7 +77,7 @@ const Page = () => {
               API key:
               <div className="p-4 bg-slate-300 rounded relative  ">
                 <p className="break-words overflow-hidden whitespace-pre-line ">
-                  {api_Key.length > 100
+                  {api_Key && api_Key.length > 100
                     ? api_Key.slice(0, 99) + "..."
                     : api_Key}
                 </p>
