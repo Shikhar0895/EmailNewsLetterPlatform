@@ -25,17 +25,21 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
     const unlayer = emailEditorRef.current?.editor;
 
     unlayer?.exportHtml(async (data) => {
-      const { design, html } = data;
-      setJsonData(design);
-      await sendEmail({
-        adminMail: user?.emailAddresses[0].emailAddress!,
-        userEmail: userEmails,
-        subject: subjectTitle,
-        content: html,
-      }).then((res) => {
-        toast.success("Email sent successfully");
-        history.push("/dashboard/write");
-      });
+      try {
+        const { design, html } = data;
+        setJsonData(design);
+        await sendEmail({
+          adminMail: user?.emailAddresses[0].emailAddress!,
+          userEmail: userEmails,
+          subject: subjectTitle,
+          content: html,
+        }).then((res) => {
+          toast.success("Email sent successfully");
+          history.push("/dashboard/write");
+        });
+      } catch (error) {
+        console.log(`Error from exportHtml: ${error}`);
+      }
     });
   };
 
