@@ -1,10 +1,9 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const error = ({ error, reset }: { error: Error; reset: () => void }) => {
-  const history = useRouter();
   return (
     <div className="flex flex-col p-4 items-center gap-4">
       Error
@@ -12,14 +11,9 @@ const error = ({ error, reset }: { error: Error; reset: () => void }) => {
         <Button color="secondary" onClick={reset}>
           Try Again
         </Button>
-        <Button
-          color="default"
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          Go Back To Homepage
-        </Button>
+        <Link href="/">
+          <Button color="default">Go Back To Homepage</Button>
+        </Link>
       </div>
       Error Name:{error.name}
       <br />
