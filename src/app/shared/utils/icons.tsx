@@ -19,6 +19,35 @@ import { FiPlusCircle } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoIosRepeat } from "react-icons/io";
 
+interface CustomIconProps {
+  width?: string | number;
+  height?: string | number;
+  fill?: string;
+  className?: string;
+}
+
+const CustomIcon: React.FC<CustomIconProps> = ({
+  width = 36,
+  height = 33,
+  fill = "currentColor",
+  className = "mb-4",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill={fill}
+    className={className}
+  >
+    <path
+      fill="#fff"
+      stroke="#3843D0"
+      strokeWidth="3"
+      d="M33.398 13.25a6.512 6.512 0 0 1 0 6.5l-4.887 8.487a6.512 6.512 0 0 1-5.643 3.263h-9.736a6.512 6.512 0 0 1-5.643-3.263L2.602 19.75a6.512 6.512 0 0 1 0-6.498l4.887-8.488A6.512 6.512 0 0 1 13.132 1.5h9.736a6.512 6.512 0 0 1 5.643 3.263l4.887 8.488Z"
+    />
+  </svg>
+);
+
 export const ICONS = {
   right: <IoMdCheckmark />,
   home: <TiHomeOutline />,
@@ -40,4 +69,5 @@ export const ICONS = {
   plus: <FiPlusCircle />,
   delete: <MdDeleteOutline />,
   regenerate: <IoIosRepeat />,
+  pricingCardSvg: <CustomIcon />,
 };

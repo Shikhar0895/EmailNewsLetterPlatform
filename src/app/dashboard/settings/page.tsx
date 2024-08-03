@@ -29,9 +29,7 @@ const Page = () => {
   }, []);
 
   const generateApiKeyHanlder = async () => {
-    console.log("generateApi key handler ran");
     await generateApiKey().then((res) => {
-      console.log(res);
       Cookies.set("api_key", res!);
       setApi_key(res!);
     });

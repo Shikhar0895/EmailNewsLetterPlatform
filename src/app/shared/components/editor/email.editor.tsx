@@ -20,13 +20,14 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   const history = useRouter();
   const { data } = useSubscribersData();
   const userEmails = data.length > 0 ? data.map((sub: any) => sub.email) : null;
-  // console.log(userEmails);
+
   const exportHtml = () => {
     const unlayer = emailEditorRef.current?.editor;
 
     unlayer?.exportHtml(async (data) => {
       try {
         const { design, html } = data;
+        console.log(data);
         setJsonData(design);
         await sendEmail({
           adminMail: user?.emailAddresses[0].emailAddress!,

@@ -26,9 +26,8 @@ export const stripeSubscribe = async ({
 }) => {
   try {
     await connectDb();
-    console.log(priceId);
+
     const user = await Membership.findOne({ user: userId });
-    console.log(user);
 
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -53,6 +52,7 @@ export const stripeSubscribe = async ({
         message: "Could not create checkout session!",
       };
     }
+
     return checkoutSession.url;
   } catch (error) {
     console.log("error from stripe subscribe", error);

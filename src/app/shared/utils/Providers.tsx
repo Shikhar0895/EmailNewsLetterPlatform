@@ -34,7 +34,8 @@ export default function Providers({ children }: ProviderProps) {
       pathname !== "/sign-in" &&
       pathname !== "/success" &&
       pathname !== "/error" &&
-      pathname !== "/subscribe" ? (
+      pathname !== "/subscribe" &&
+      pathname !== "/upgradePlan" ? (
         <div className="w-full flex">
           <div className="w-[290px] h-screen overflow-y-scroll overflow-x-clip">
             <DashboardSidebar />

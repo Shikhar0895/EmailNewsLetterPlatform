@@ -23,6 +23,6 @@ export const connectDb = async () => {
         console.log(r);
       });
   } catch (error) {
-    console.error(error);
+    console.error("Error while connecting DB:", error);
   }
 };

@@ -7,7 +7,7 @@ import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 
 function corsmiddleware(req: NextRequest) {
   // Create a response object for OPTIONS requests or a default response for others
-  // clerkMiddleware();
+
   let response =
     req.method === "OPTIONS"
       ? new NextResponse(null, {
@@ -43,13 +43,23 @@ function corsmiddleware(req: NextRequest) {
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/subscribe(.*)",
+  "/success(.*)",
+  "/upgradePlan(.*)",
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) auth().protect();
-  return corsmiddleware(req);
-});
-
+// export default clerkMiddleware((auth, req) => {
+//   if (isProtectedRoute(req)) auth().protect();
+//   return corsmiddleware(req);
+// });
+export default clerkMiddleware(
+  // (auth, req) => {
+  //   console.log("auth:", auth);
+  //   console.log("req:", req);
+  // },
+  {
+    authorizedParties: [`${process.env.NEXT_PUBLIC_WEBSITE_URL}`],
+  }
+);
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

@@ -15,12 +15,14 @@ const UserPlan = () => {
   const history = useRouter();
 
   const handleManage = async () => {
-    await manageSubscription({
-      customerId: membershipData[0].stripeCustomerId,
-    }).then((res: any) => {
-      history.push(res);
-    });
+    // await manageSubscription({
+    //   customerId: membershipData[0].stripeCustomerId,
+    // }).then((res: any) => {
+    //   history.push(res);
+    // });
+    history.push("/upgradePlan");
   };
+
   if (membershipLoading) {
     return (
       <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">

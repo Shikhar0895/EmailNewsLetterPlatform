@@ -54,7 +54,7 @@ const Write = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 p-4 w-full">
+    <div className="flex flex-col gap-2 py-4 w-full">
       <Button
         color="danger"
         onClick={deleteAllHandler}
@@ -70,6 +70,7 @@ const Write = () => {
           <span className="text-2xl block text-center mb-3">{ICONS.plus}</span>
           <h5 className="text-2xl">Create New</h5>
         </div>
+
         {/* saved emails */}
         {emails &&
           emails.map((i: any) => {
@@ -97,7 +98,7 @@ const Write = () => {
             );
           })}
         {open && (
-          <div className="absolute flex items-center justify-center top-0 left-0 bg-[#00000028] h-screen w-full">
+          <div className="absolute flex items-center justify-center -top-16 left-0 bg-[#00000028] h-screen w-full">
             <div className="w-[600px] p-5 bg-white rounded shadow relative">
               <div className="absolute top-3 right-3">
                 <span
@@ -127,6 +128,7 @@ const Write = () => {
           </div>
         )}
       </div>
+      <div className="bg-gray-400 w-[80%] h-[4px]"></div>
     </div>
   );
 };

@@ -23,3 +23,12 @@ type subscribersDataTypes = {
   source: string;
   status?: string;
 };
+
+type PlanInfo = {
+  cardTitle: string;
+  priceMonthly: string;
+  priceYearly: string;
+  priceMonthlyStripeId?: string;
+  priceYearlyStripeId?: string;
+  whatsIncluded: PlanType[];
+};

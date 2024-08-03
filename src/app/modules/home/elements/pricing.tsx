@@ -1,10 +1,9 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
-import PricingCard from "@/app/shared/components/cards/pricing.card";
-import Pricingcard from "@/app/shared/components/cards/pricing.card";
+import Pricingcards from "@/app/shared/components/cards/pricing.card";
 const Pricing = () => {
-  const [active, setActive] = useState("Monthly");
+  const [active, setActive] = useState<"Monthly" | "Yearly">("Monthly");
   return (
     <div className="w-full bg-[#fec8eb]">
       <div className="w-[95%] m-auto py-5">
@@ -38,7 +37,7 @@ const Pricing = () => {
             </Button>
           </div>
         </div>
-        <Pricingcard active={active} />
+        <Pricingcards active={active} />
       </div>
     </div>
   );

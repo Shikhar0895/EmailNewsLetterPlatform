@@ -1,10 +1,13 @@
-import Stripe from "stripe";
-import { NextRequest, NextResponse } from "next/server";
-import Membership from "@/models/membership.model";
+// import Stripe from "stripe";
+// import { NextRequest, NextResponse } from "next/server";
+// import Membership from "@/models/membership.model";
+// import { stripe } from "@/app/shared/utils/helperFunc";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-04-10",
-});
+import { stripe } from "@/app/shared/utils/helperFunc";
+import Membership from "@/models/membership.model";
+import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -19,7 +22,7 @@ const webhookHandler = async (req: NextRequest) => {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      // On error, log and return the error message.
+
       if (err! instanceof Error) console.log(err);
       console.log(`❌ Error message: ${errorMessage}`);
 
@@ -33,16 +36,9 @@ const webhookHandler = async (req: NextRequest) => {
       );
     }
 
-    // Successfully constructed event.
-    console.log("✅ Success:", event.id);
-
-    // getting to the data we want from the event
     const subscription = event.data.object as Stripe.Subscription;
     const itemId: any = subscription.items.data[0].price.product;
-
-    // Fetch the product (plan) details
     const product = await stripe.products.retrieve(itemId);
-
     const planName = product.name;
 
     switch (event.type) {
@@ -52,7 +48,6 @@ const webhookHandler = async (req: NextRequest) => {
         });
 
         if (membership) {
-          console.log("membership found");
           await Membership.updateOne(
             {
               stripeCustomerId: subscription.customer,
@@ -66,13 +61,15 @@ const webhookHandler = async (req: NextRequest) => {
       case "customer.subscription.deleted":
         // subscription deleted
         break;
+      case "checkout.session.completed":
+        console.log("checkout completed");
+        break;
 
       default:
         console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
         break;
     }
 
-    // Return a response to acknowledge receipt of the event.
     return NextResponse.json({ received: true });
   } catch (err) {
     console.log("unexpected error:", err);

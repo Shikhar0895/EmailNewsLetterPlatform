@@ -82,6 +82,75 @@ export const scalePlan: PlanType[] = [
   },
 ];
 
+export const CardInfo = [
+  {
+    cardTitle: "LAUNCH",
+    priceMonthly: "0",
+    priceYearly: "0",
+    priceMonthlyStripeId: "No Id",
+    priceYearlyStripeId: "No Id",
+    whatsIncluded: [
+      {
+        title: "Up to 2,500 subscribers",
+      },
+      {
+        title: "Unlimited sends",
+      },
+      {
+        title: "Custom newsletter",
+      },
+      {
+        title: "Newsletter analytics",
+      },
+    ],
+  },
+  {
+    cardTitle: "GROW",
+    priceMonthly: "1200",
+    priceYearly: "800",
+    priceMonthlyStripeId: "price_1PSeynRoGUmdP5c1psVk1Er9",
+    priceYearlyStripeId: "price_1PUrByRoGUmdP5c1fmD6LQJ5",
+    whatsIncluded: [
+      {
+        title: "Up to 10,000 subscribers",
+      },
+      {
+        title: "Custom domains",
+      },
+      {
+        title: "API access",
+      },
+      {
+        title: "Newsletter community",
+      },
+    ],
+  },
+  {
+    cardTitle: "SCALE",
+    priceMonthly: "1500",
+    priceYearly: "1000",
+    priceMonthlyStripeId: "price_1PUoq6RoGUmdP5c1pAeayoQp",
+    priceYearlyStripeId: "price_1PUrAiRoGUmdP5c1WFYB8tkU",
+    whatsIncluded: [
+      {
+        title: "Up to 100,000 subscribers",
+      },
+      {
+        title: "Referal program",
+      },
+      {
+        title: "AI support",
+      },
+      {
+        title: "Advanced support system",
+      },
+      {
+        title: "Ad Network",
+      },
+    ],
+  },
+];
+
 export const sideBarActiveItem = atom<string>("/dashboard");
 
 export const reportFilterActiveItem = atom<string>("Overview");
@@ -147,19 +216,3 @@ export const stripePaymentLinkUrlYearly = [
     link: "https://buy.stripe.com/test_3cs2bJ5fZ3vKdva147",
   },
 ];
-// export const subscribersData: subscribersDataTypes[] = [
-//   {
-//     _id: "64f717a45331088de2ce886c",
-//     email: "programmershahriarsajeeb@gmail.com",
-//     createdAt: "5Feb 2024",
-//     source: "Becodemy website",
-//     status: "subscribed",
-//   },
-//   {
-//     _id: "64f717a45331088de2ce886c",
-//     email: "support@becodemy.com",
-//     createdAt: "8Feb 2024",
-//     source: "External website",
-//     status: "subscribed",
-//   },
-// ];
