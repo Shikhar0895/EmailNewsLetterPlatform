@@ -1,6 +1,6 @@
 import { manageSubscription } from "@/actions/manage.subscription";
 import useGetMembership from "@/app/shared/hooks/useGetMembership";
-import useSubscribersAnalytics from "@/app/shared/hooks/useSubscribersAnalytics";
+
 import useSubscribersData from "@/app/shared/hooks/useSubscribersData";
 import { ICONS } from "@/app/shared/utils/icons";
 import { Slider } from "@nextui-org/react";
@@ -15,11 +15,6 @@ const UserPlan = () => {
   const history = useRouter();
 
   const handleManage = async () => {
-    // await manageSubscription({
-    //   customerId: membershipData[0].stripeCustomerId,
-    // }).then((res: any) => {
-    //   history.push(res);
-    // });
     history.push("/upgradePlan");
   };
 
@@ -30,13 +25,13 @@ const UserPlan = () => {
       </div>
     );
   }
-
+  if (!membershipData) {
+    return <p>No membership data available</p>;
+  }
   return (
     <div className="w-full my-3 p-3 bg-[#FDF1F8] rounded hover:shadow-xl cursor-pointer">
       <div className="w-full flex items-center">
-        <h5 className="text-lg font-medium">
-          {membershipLoading ? "Loading..." : membershipData[0]?.plan}
-        </h5>
+        <h5 className="text-lg font-medium">{membershipData[0]?.plan}</h5>
         <div
           className="w-[95px] shadow ml-2 cursor-pointer h-[32px] flex justify-center items-center space-x-1 rounded-lg bg-[#E77CAE]"
           onClick={handleManage}
