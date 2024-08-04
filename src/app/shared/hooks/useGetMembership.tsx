@@ -1,5 +1,6 @@
 "use client";
-import { getMembership } from "@/actions/get.membership";
+import { getMembership, getMembership2 } from "@/actions/get.membership";
+import { useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 
 type data = {
@@ -15,13 +16,14 @@ type data = {
 const useGetMembership = () => {
   const [data, setData] = useState<data[]>([]);
   const [loading, setLoading] = useState<any>(true);
+  const { user } = useUser();
 
   useEffect(() => {
-    handleGetMembership();
-  }, []);
+    handleGetMembership(user?.id!);
+  }, [user]);
 
-  const handleGetMembership = async () => {
-    await getMembership()
+  const handleGetMembership = async (user: string) => {
+    await getMembership2(user)
       .then((res: any) => {
         setData(res);
         setLoading(false);

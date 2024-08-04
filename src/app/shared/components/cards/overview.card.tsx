@@ -4,10 +4,7 @@ import useSubscribersAnalytics from "../../hooks/useSubscribersAnalytics";
 
 const OverviewCard = () => {
   const { subscribersData, loading } = useSubscribersAnalytics();
-  /*useSubscriberAnalytics ---> 
-  subscriberAnalytics ---> input (subscriberModel)
-  */
-  // console.log(subscribersData);
+  console.log(subscribersData, loading);
 
   const lastMonthSubscribers =
     !loading &&
@@ -29,7 +26,6 @@ const OverviewCard = () => {
   }
   return (
     <div className="w-full xl:py-4 flex bg-white border rounded">
-      {/* subscribers */}
       <div className="w-[33.33%] border-r p-5 text-lg">
         <h5 className="text-lg">Subscribers</h5>
         <div className="w-full flex items-center justify-between">

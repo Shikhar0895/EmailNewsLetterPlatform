@@ -22,9 +22,9 @@ const getMembership2 = async (user: string) => {
   try {
     await connectDb();
     // const user = await currentUser();
-    console.log(user);
+    // console.log(user);
     const membershipData = await Membership.find({ user: user });
-    console.log(membershipData);
+    // console.log(membershipData);
 
     return JSON.parse(JSON.stringify(membershipData));
   } catch (error) {
