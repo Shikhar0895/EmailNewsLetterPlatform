@@ -18,7 +18,7 @@ const Page = () => {
   const { activeItem } = useSettingsFilter();
   const [api_Key, setApi_key] = useState("");
   const [copied, setCopied] = useState(false);
-
+  console.log(data);
   useEffect(() => {
     const apiKey = Cookies.get("api_key");
     if (!apiKey) {
@@ -65,8 +65,7 @@ const Page = () => {
       )}
       {activeItem === "API Access" && (
         <div>
-          {data[0]?.plan.includes("GROW") /*||
-          data[0]?.plan.includes("LAUNCH")*/ ? (
+          {data[0]?.plan.includes("GROW") ? (
             <div className="w-full flex justify-center items-center">
               <h3>Please update you subscription plan to get access of API</h3>
             </div>
