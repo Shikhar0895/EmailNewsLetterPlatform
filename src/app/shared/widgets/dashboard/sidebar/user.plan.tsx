@@ -17,6 +17,7 @@ const UserPlan = () => {
   const handleManage = async () => {
     history.push("/upgradePlan");
   };
+  console.log(membershipData);
 
   if (membershipLoading) {
     return (

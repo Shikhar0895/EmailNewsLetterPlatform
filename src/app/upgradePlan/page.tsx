@@ -4,20 +4,18 @@ import useGetMembership from "../shared/hooks/useGetMembership";
 import { CardInfo } from "../configs/constants";
 import Pricingcard from "../shared/components/cards/pricing.card.2";
 import { Button } from "@nextui-org/react";
-import upgradeSubscription from "@/actions/upgrade.subscription";
-import { AuthRequiredError } from "../shared/libs/exceptions";
 
 const Page = () => {
   const { data, loading } = useGetMembership();
   const [active, setActive] = useState<"Monthly" | "Yearly">("Monthly");
-
+  console.log(data, loading);
   if (loading)
     return (
       <div className="p-4 flex justify-center items-center">Loading .....</div>
     );
   return (
     <div className="p-7 min-h-screen bg-gradient-to-br from-slate-50 to-slate-900 via-slate-400">
-      Current Plan : {data[0].plan}
+      Current Plan : {data[0]?.plan}
       <hr />
       You might want to upgrade to Plans listed below:
       <div className="flex items-center my-6 md:mt-0 justify-end">
