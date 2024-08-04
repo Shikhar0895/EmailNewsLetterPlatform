@@ -4,7 +4,7 @@ import useGetMembership from "../shared/hooks/useGetMembership";
 import { CardInfo } from "../configs/constants";
 import Pricingcard from "../shared/components/cards/pricing.card.2";
 import { Button } from "@nextui-org/react";
-import { getMembership } from "@/actions/get.membership";
+import { getMembership, getMembership2 } from "@/actions/get.membership";
 
 const Page = () => {
   const { data, loading } = useGetMembership();
@@ -12,7 +12,7 @@ const Page = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await getMembership();
+      const response = await getMembership2("user_2jRtjFMzXtYwe1XfD8E0vA5n2I5");
       const data = await response;
       console.log(data);
     })();
