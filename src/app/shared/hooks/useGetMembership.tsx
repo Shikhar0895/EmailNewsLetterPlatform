@@ -23,7 +23,6 @@ const useGetMembership = () => {
   const handleGetMembership = async () => {
     await getMembership()
       .then((res: any) => {
-        console.log("res from useGetMembership:", res);
         setData(res);
         setLoading(false);
       })

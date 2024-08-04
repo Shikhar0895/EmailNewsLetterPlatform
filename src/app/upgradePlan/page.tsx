@@ -1,14 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useGetMembership from "../shared/hooks/useGetMembership";
 import { CardInfo } from "../configs/constants";
 import Pricingcard from "../shared/components/cards/pricing.card.2";
 import { Button } from "@nextui-org/react";
+import { getMembership } from "@/actions/get.membership";
 
 const Page = () => {
   const { data, loading } = useGetMembership();
   const [active, setActive] = useState<"Monthly" | "Yearly">("Monthly");
-  console.log(data, loading);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getMembership();
+      const data = await response;
+      console.log(data);
+    })();
+  }, []);
+
   if (loading)
     return (
       <div className="p-4 flex justify-center items-center">Loading .....</div>
