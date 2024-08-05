@@ -39,6 +39,7 @@ const webhookHandler = async (req: NextRequest) => {
     const itemId: any = subscription.items.data[0].price.product;
     const product = await stripe.products.retrieve(itemId);
     const planName = product.name;
+    console.log("subscription:", subscription);
 
     switch (event.type) {
       case "customer.subscription.created":
@@ -69,7 +70,7 @@ const webhookHandler = async (req: NextRequest) => {
         break;
     }
 
-    return NextResponse.json({ received: true });
+    return NextResponse.json({ received: true }, { status: 200 });
   } catch (err) {
     console.log("unexpected error:", err);
     return NextResponse.json(
