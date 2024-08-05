@@ -5,7 +5,6 @@
 
 import { stripe } from "@/app/shared/utils/helperFunc";
 import Membership from "@/models/membership.model";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -17,9 +16,9 @@ const webhookHandler = async (req: NextRequest) => {
     const sig = req.headers.get("stripe-signature")!;
 
     let event: Stripe.Event;
-
     try {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+      console.log("Event constructed successfully");
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
 
