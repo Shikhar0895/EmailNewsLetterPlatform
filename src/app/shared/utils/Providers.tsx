@@ -31,7 +31,7 @@ export default function Providers({ children }: ProviderProps) {
       {pathname !== "/dashboard/new-email" &&
       pathname !== "/" &&
       !pathname.includes("/sign-up") &&
-      pathname !== "/sign-in" &&
+      pathname.startsWith("/sign-in") &&
       pathname !== "/success" &&
       pathname !== "/error" &&
       pathname !== "/subscribe" &&
