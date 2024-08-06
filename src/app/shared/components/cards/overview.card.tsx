@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ICONS } from "../../utils/icons";
 import useSubscribersAnalytics from "../../hooks/useSubscribersAnalytics";
+import getSubscriberCount from "@/actions/getSubscriberCount";
 
 const OverviewCard = () => {
   const { subscribersData, loading } = useSubscribersAnalytics();
-  console.log(
-    "🚀 ~ OverviewCard ~ subscribersData, loading:",
-    subscribersData,
-    loading
-  );
+  // console.log(
+  //   "🚀 ~ OverviewCard ~ subscribersData, loading:",
+  //   subscribersData,
+  //   loading
+  // );
 
   const lastMonthSubscribers =
     !loading &&
@@ -28,6 +29,13 @@ const OverviewCard = () => {
   } else {
     comparePercentage = 100;
   }
+
+  useEffect(() => {
+    (async () => {
+      await getSubscriberCount();
+    })();
+  }, []);
+
   return (
     <div className="w-full xl:py-4 flex bg-white border rounded">
       <div className="w-[33.33%] border-r p-5 text-lg">

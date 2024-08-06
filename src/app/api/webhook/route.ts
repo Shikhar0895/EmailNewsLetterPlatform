@@ -36,6 +36,7 @@ const webhookHandler = async (req: NextRequest) => {
         const itemId: any = subscription.items.data[0]?.price.product;
         const product = await stripe.products.retrieve(itemId);
         const planName = product.name;
+
         const membership = await Membership.findOne({
           stripeCustomerId: subscription.customer,
         });
