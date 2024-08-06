@@ -6,8 +6,15 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const getSubscriberCount = async () => {
   const user = await currentUser();
+  console.log("🚀 ~ getSubscriberCount ~ user:", user);
+
   try {
     await connectDb();
+    const subscribers = await Subscriber.find({
+      newsLetterOwnerId: user?.id,
+    });
+    console.log("🚀 ~ getSubscriberCount ~ subscribers:", subscribers);
+
     const count = await Subscriber.find({
       newsLetterOwnerId: user?.id,
     }).countDocuments({
