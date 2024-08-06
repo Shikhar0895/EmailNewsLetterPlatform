@@ -10,14 +10,6 @@ const Page = () => {
   const { data, loading } = useGetMembership();
   const [active, setActive] = useState<"Monthly" | "Yearly">("Monthly");
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await getMembership2("user_2jRtjFMzXtYwe1XfD8E0vA5n2I5");
-  //     const data = await response;
-  //     console.log(data);
-  //   })();
-  // }, []);
-
   if (loading)
     return (
       <div className="p-4 flex justify-center items-center">Loading .....</div>

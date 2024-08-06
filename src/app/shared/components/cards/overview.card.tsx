@@ -4,7 +4,11 @@ import useSubscribersAnalytics from "../../hooks/useSubscribersAnalytics";
 
 const OverviewCard = () => {
   const { subscribersData, loading } = useSubscribersAnalytics();
-  console.log(subscribersData, loading);
+  console.log(
+    "🚀 ~ OverviewCard ~ subscribersData, loading:",
+    subscribersData,
+    loading
+  );
 
   const lastMonthSubscribers =
     !loading &&

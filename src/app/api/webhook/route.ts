@@ -1,8 +1,3 @@
-// import Stripe from "stripe";
-// import { NextRequest, NextResponse } from "next/server";
-// import Membership from "@/models/membership.model";
-// import { stripe } from "@/app/shared/utils/helperFunc";
-
 import { stripe } from "@/app/shared/utils/helperFunc";
 import Membership from "@/models/membership.model";
 import { NextRequest, NextResponse } from "next/server";
@@ -35,14 +30,12 @@ const webhookHandler = async (req: NextRequest) => {
       );
     }
 
-    const subscription = event.data.object as Stripe.Subscription;
-    const itemId: any = subscription.items.data[0].price.product;
-    const product = await stripe.products.retrieve(itemId);
-    const planName = product.name;
-    console.log("subscription:", subscription);
-
     switch (event.type) {
       case "customer.subscription.created":
+        const subscription = event.data.object as Stripe.Subscription;
+        const itemId: any = subscription.items.data[0]?.price.product;
+        const product = await stripe.products.retrieve(itemId);
+        const planName = product.name;
         const membership = await Membership.findOne({
           stripeCustomerId: subscription.customer,
         });
@@ -57,9 +50,6 @@ const webhookHandler = async (req: NextRequest) => {
         } else {
           console.log("No membership exists");
         }
-        break;
-      case "customer.subscription.deleted":
-        // subscription deleted
         break;
       case "checkout.session.completed":
         console.log("checkout completed");

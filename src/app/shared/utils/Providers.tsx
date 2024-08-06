@@ -3,7 +3,6 @@ import { useUser } from "@clerk/nextjs";
 import { NextUIProvider } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import DashboardSidebar from "@/app/shared/widgets/dashboard/sidebar/dashboard.sidebar";
-import Dashboard from "@/app/modules/dashboard";
 import { Toaster } from "react-hot-toast";
 import { addStripe } from "@/actions/add.stripe";
 import { useEffect } from "react";
@@ -31,7 +30,7 @@ export default function Providers({ children }: ProviderProps) {
       {pathname !== "/dashboard/new-email" &&
       pathname !== "/" &&
       !pathname.includes("/sign-up") &&
-      pathname.startsWith("/sign-in") &&
+      !pathname.includes("/sign-in") &&
       pathname !== "/success" &&
       pathname !== "/error" &&
       pathname !== "/subscribe" &&

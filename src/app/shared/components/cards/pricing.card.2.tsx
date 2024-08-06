@@ -13,7 +13,6 @@ const Pricingcard = ({
   active: "Monthly" | "Yearly";
 }) => {
   const { user } = useUser();
-  console.log(user);
   const history = useRouter();
 
   const handleSubscription = async ({
@@ -27,7 +26,6 @@ const Pricingcard = ({
       priceId: priceId,
       userId: user?.id!,
     }).then((res: any) => {
-      console.log(res);
       history.push(res);
     });
   };
